@@ -40,4 +40,16 @@ async function loginOrCreate(request: Request, response: Response) {
   }
 }
 
-export { loginOrCreate }
+async function getUser(request: Request, response: Response) {
+  const user = await prisma.user.findUnique({ where: {
+    id: Number(request.params.id)
+  }})
+
+  if(!user){
+    return response.status(400).send('User ' + request.params.id + ' not found')
+  }
+
+  return response.status(200).send(user)
+}
+
+export { loginOrCreate, getUser }
