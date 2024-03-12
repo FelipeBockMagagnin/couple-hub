@@ -40,7 +40,7 @@ async function loginOrCreate(request: Request, response: Response) {
   }
 }
 
-async function getUser(request: Request, response: Response) {
+async function get(request: Request, response: Response) {
   const user = await prisma.user.findUnique({ where: {
     id: Number(request.params.id)
   }})
@@ -52,4 +52,25 @@ async function getUser(request: Request, response: Response) {
   return response.status(200).send(user)
 }
 
-export { loginOrCreate, getUser }
+async function update(request: Request, response: Response) {
+  if (!request.body.house_id) {
+    return response.status(400).send('Invalid house id')
+  }
+
+  const updateUser = await prisma.user.update({
+    where: {
+      id: Number(request.params.id),
+    },
+    data: {
+      houseId: request.body.house_id,
+    },
+  })
+
+  if(!updateUser){
+    return response.status(400).send('User ' + request.params.id + ' not found')
+  }
+
+  return response.status(200).send(updateUser)
+}
+
+export { loginOrCreate, get, update }
