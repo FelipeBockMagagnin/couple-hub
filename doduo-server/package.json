@@ -1,5 +1,5 @@
 {
-  "name": "server",
+  "name": "doduo-server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/FelipeBockMagagnin/game-library-server.git"
+    "url": "git+https://github.com/FelipeBockMagagnin/doduo.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/FelipeBockMagagnin/game-library-server/issues"
+    "url": "https://github.com/FelipeBockMagagnin/doduo/issues"
   },
-  "homepage": "https://github.com/FelipeBockMagagnin/game-library-server#readme",
+  "homepage": "https://github.com/FelipeBockMagagnin/doduo#readme",
   "dependencies": {
     "@prisma/client": "^5.10.2",
     "cors": "^2.8.5",
