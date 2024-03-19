@@ -15,12 +15,14 @@ datasource db {
 }
 
 model House {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  name      String   @db.VarChar(200)
-  code      String   @default(uuid())
-  users     User[]
+  id         Int      @id @default(autoincrement())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  name       String   @db.VarChar(200)
+  code       String   @default(uuid())
+  users      User[]
+  tasks      Task[]
+  categories Category[]
 }
 
 model User {
@@ -30,5 +32,26 @@ model User {
   googleId String   @db.VarChar(200)
   name     String   @db.VarChar(200)
   email    String   @unique
+  tasks    Task[]
 }
 
+model Task {
+  id          Int      @id @default(autoincrement())
+  listId      Int  
+  name        String   @db.VarChar(200)
+  description String   
+  date        DateTime?
+  userId      Int?    
+  houseId     Int  
+  house       House   @relation(fields: [houseId], references: [id])
+  user        User?   @relation(fields: [userId], references: [id])
+}
+
+model Category {
+  id          Int      @id @default(autoincrement())
+  name        String   @db.VarChar(200)
+  description String 
+  color       String   @db.VarChar(10)
+  houseId     Int  
+  house       House    @relation(fields: [houseId], references: [id])
+}
